@@ -98,8 +98,20 @@ npm start
 ```
 
 ### 5. API Documentation
+Render link:https://backend-developer-intern.onrender.com
 Once the server is running, visit:
 👉 **http://localhost:5000/api-docs**
+
+###
+Note: In this project, email verification and forgot-password links are not sent via email. Instead, the links are displayed in the running command-line console. The user must copy the link from the console and paste it into a browser to complete the activation process.
+
+### for login admin and user
+
+admin email :admin@gmail.com
+admin password:admin123
+
+user emai:user@gmail.com
+user password:user123@
 
 ---
 
@@ -140,3 +152,4 @@ Once the server is running, visit:
 - Development mode provides detailed stack traces.
 - Production mode provides user-friendly messages and hides implementation details.
 - Handles MongoDB Duplicate Key, Validation, and Cast errors gracefully.
+
