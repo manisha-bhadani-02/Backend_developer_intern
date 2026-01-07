@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.status(HTTP_STATUS.OK).json({
     status: "success",
-    message: "🚀 Backend API is running"
+    message: " Backend API is running"
   });
 });
 
@@ -92,4 +92,5 @@ app.use((req, res, next) => {
 app.use(globalErrorHandler);
 
 export default app;
+
 
