@@ -3,7 +3,6 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
-// Security & Utils
 import { globalLimiter } from "./middleware/rateLimit.middleware";
 import { globalErrorHandler } from "./middleware/error.middleware";
 import { AppError } from "./utils/AppError";
@@ -23,17 +22,15 @@ import swaggerSpec from "./config/swagger";
 const app = express();
 
 /* =====================
-   SECURITY MIDDLEWARE
+   SECURITY
 ===================== */
 app.use(helmet());
-
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "*",
     credentials: true
   })
 );
-
 app.use(globalLimiter);
 
 /* =====================
@@ -44,12 +41,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /* =====================
-   ROOT ROUTE (IMPORTANT)
+   ROOT ROUTE
 ===================== */
 app.get("/", (req, res) => {
   res.status(HTTP_STATUS.OK).json({
     status: "success",
-    message: "🚀 Backend API is running successfully"
+    message: "🚀 Backend API is running"
   });
 });
 
@@ -73,14 +70,14 @@ app.use("/api/v1/notes", noteRoutes);
 app.use("/api/v1/products", productRoutes);
 
 /* =====================
-   SWAGGER DOCS
+   SWAGGER
 ===================== */
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /* =====================
-   404 HANDLER
+   404 HANDLER (EXPRESS 5 FIX)
 ===================== */
-app.all("*", (req, res, next) => {
+app.use((req, res, next) => {
   next(
     new AppError(
       `Can't find ${req.originalUrl} on this server!`,
@@ -95,3 +92,4 @@ app.all("*", (req, res, next) => {
 app.use(globalErrorHandler);
 
 export default app;
+
